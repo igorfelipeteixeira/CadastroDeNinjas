@@ -14,24 +14,24 @@ public class NinjaController {
         this.ninjaService = ninjaService;
     }
 
-    @GetMapping("/boasvindas")
-    public String boasVindas() {
+    @GetMapping("/welcome")
+    public String welcome() {
         return "Meu primeiro programa no SpringBoot";
     }
 
     @PostMapping("/create")
-    public String createNinja() {
-        return "Ninja criado";
+    public NinjaModel createNinja(@RequestBody NinjaModel ninjaModel) {
+        return ninjaService.createNinja(ninjaModel);
     }
 
-    @GetMapping("/all")
-    public List<NinjaModel> showNinjas() {
-        return ninjaService.showNinjas();
+    @GetMapping("/list-ninjas")
+    public List<NinjaModel> listNinjas() {
+        return ninjaService.listNinjas();
     }
 
-    @GetMapping("/ninja/{id}")
-    public NinjaModel showNinjaById(@PathVariable Long id) {
-        return ninjaService.showNinjaById(id);
+    @GetMapping("/list-ninjas-by-id/{id}")
+    public NinjaModel listNinjaById(@PathVariable Long id) {
+        return ninjaService.listNinjaById(id);
     }
 
     @PutMapping("/updateID")
