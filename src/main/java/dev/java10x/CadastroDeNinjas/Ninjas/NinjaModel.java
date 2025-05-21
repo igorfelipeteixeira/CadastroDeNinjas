@@ -20,6 +20,10 @@ public class NinjaModel {
     @Column(unique = true)
     private String email;
 
+    private String rank;
+
+    private String village;
+
     private int age;
 
     @ManyToOne
