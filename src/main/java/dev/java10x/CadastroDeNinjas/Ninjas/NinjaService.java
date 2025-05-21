@@ -29,4 +29,13 @@ public class NinjaService {
     public NinjaModel createNinja(NinjaModel ninjaModel) {
         return ninjaRepository.save(ninjaModel);
     }
+
+    // Delete Ninjas By ID
+    public void deleteNinjaById(Long id) {
+        ninjaRepository.deleteById(id);
+    }
+
+    // Update Ninjas By ID
+
+
 }

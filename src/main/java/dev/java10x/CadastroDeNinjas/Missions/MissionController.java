@@ -21,24 +21,24 @@ public class MissionController {
         return missionService.createMission(missionModel);
     }
 
-    @GetMapping("/list-missions")
+    @GetMapping("/list")
     public List<MissionModel> listMissions() {
         return missionService.listMissions();
     }
 
-    @GetMapping("/list-missions-by-id/{id}")
+    @GetMapping("/list-by-id/{id}")
     public MissionModel listMissionById(@PathVariable Long id) {
         return missionService.listMissionsById(id);
     }
 
-    @PutMapping("/update-mission-by-id")
+    @PutMapping("/update--by-id")
     public String updateMissionById() {
         return "Mission updated";
     }
 
-    @DeleteMapping("/delete-mission-by-id")
-    public String deleteMissionById() {
-        return "Mission deleted";
+    @DeleteMapping("/delete-by-id/{id}")
+    public void deleteMissionById(@PathVariable Long id) {
+        missionService.deleteMissionById(id);
     }
 
 
