@@ -2,9 +2,7 @@ package dev.java10x.CadastroDeNinjas.Ninjas;
 
 import dev.java10x.CadastroDeNinjas.Missions.MissionModel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_cadastro")
@@ -27,5 +25,6 @@ public class NinjaModel {
     @ManyToOne
     @JoinColumn(name = "missions_id")
     private MissionModel missions;
+
 
 }

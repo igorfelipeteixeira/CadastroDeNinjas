@@ -28,17 +28,17 @@ public class MissionController {
 
     @GetMapping("/list-by-id/{id}")
     public MissionModel listMissionById(@PathVariable Long id) {
-        return missionService.listMissionsById(id);
+        return missionService.listMissionById(id);
     }
 
-    @PutMapping("/update--by-id")
-    public String updateMissionById() {
-        return "Mission updated";
+    @PutMapping("/update/{id}")
+    public MissionModel updateMission(@PathVariable Long id, @RequestBody MissionModel missionModel) {
+        return missionService.updateMission(id, missionModel);
     }
 
     @DeleteMapping("/delete-by-id/{id}")
     public void deleteMissionById(@PathVariable Long id) {
-        missionService.deleteMissionById(id);
+        missionService.deleteMission(id);
     }
 
 

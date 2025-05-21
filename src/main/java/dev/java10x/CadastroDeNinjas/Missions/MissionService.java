@@ -20,7 +20,7 @@ public class MissionService {
     }
 
     // List Mission By ID
-    public MissionModel listMissionsById(Long id) {
+    public MissionModel listMissionById(Long id) {
         Optional<MissionModel> missionModel = missionRepository.findById(id);
         return missionModel.orElse(null);
     }
@@ -31,7 +31,16 @@ public class MissionService {
     }
 
     // Delete Missions by ID
-    public void deleteMissionById(Long id) {
+    public void deleteMission(Long id) {
         missionRepository.deleteById(id);
+    }
+
+    // Update Missions by ID
+    public MissionModel updateMission(Long id, MissionModel missionModel) {
+        if (missionRepository.existsById(id)) {
+            missionModel.setId(id);
+            return missionRepository.save(missionModel);
+        }
+        return null;
     }
 }
