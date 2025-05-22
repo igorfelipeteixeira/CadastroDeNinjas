@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NinjaService {
@@ -17,14 +18,17 @@ public class NinjaService {
     }
 
     // List Ninjas
-    public List<NinjaModel> listNinjas() {
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> listNinjas() {
+        List<NinjaModel> ninjaModels = ninjaRepository.findAll();
+        return ninjaModels.stream()
+                .map(ninjaMapper::map)
+                .collect(Collectors.toList());
     }
 
     // List Ninjas By ID
-    public NinjaModel listNinjaById(Long id) {
+    public NinjaDTO listNinjaById(Long id) {
         Optional<NinjaModel> ninjaModel = ninjaRepository.findById(id);
-        return ninjaModel.orElse(null);
+        return ninjaModel.map(ninjaMapper::map).orElse(null);
     }
 
     // Create Ninjas
@@ -40,14 +44,16 @@ public class NinjaService {
     }
 
     // Update Ninjas By ID
-    public NinjaModel updateNinja(Long id, NinjaModel ninjaModel) {
-        if (ninjaRepository.existsById(id)) {
-            ninjaModel.setId(id);
-            return ninjaRepository.save(ninjaModel);
+    public NinjaDTO updateNinja(Long id, NinjaDTO ninjaDTO) {
+        Optional<NinjaModel> ninjaModel = ninjaRepository.findById(id);
+        if (ninjaModel.isPresent()) {
+            NinjaModel ninjaUpdated = ninjaMapper.map(ninjaDTO);
+            ninjaUpdated.setId(id);
+            NinjaModel ninjaSave = ninjaRepository.save(ninjaUpdated);
+            return ninjaMapper.map(ninjaSave);
         }
-        return null;
+            return null;
     }
-
 }
 
 
