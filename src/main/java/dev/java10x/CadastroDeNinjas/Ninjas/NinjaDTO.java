@@ -1,23 +1,19 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
 import dev.java10x.CadastroDeNinjas.Missions.MissionModel;
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "tb_cadastro")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class NinjaModel {
+public class NinjaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @Column(unique = true)
     private String email;
 
     private String rank;
@@ -26,9 +22,5 @@ public class NinjaModel {
 
     private int age;
 
-    @ManyToOne
-    @JoinColumn(name = "missions_id")
     private MissionModel missions;
-
-
 }
